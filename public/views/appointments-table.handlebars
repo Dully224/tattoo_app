@@ -1,0 +1,25 @@
+<h2>Appointments</h2>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Service</th>
+            <th>Date</th>
+            <th>Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each appointments}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{name}}</td>
+                <td>{{email}}</td>
+                <td>{{service}}</td>
+                <td>{{date}}</td>
+                <td>{{time}}</td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
