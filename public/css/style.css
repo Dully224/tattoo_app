@@ -2,7 +2,7 @@ body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     background-color: #111;
     /* Dark background */
-    color: #eee;
+    color: white;
     /* Light text */
     margin: 0;
     padding: 0;
@@ -11,7 +11,7 @@ body {
 header {
     background-color: #222;
     /* Slightly lighter background for the header */
-    color: #fff;
+    color: white;
     text-align: center;
     padding: 20px 0;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -37,14 +37,12 @@ h2 {
     padding: 20px;
 }
 
-/* Stylish navigation */
 ul.tabs {
     list-style: none;
     padding: 0;
     display: flex;
     justify-content: center;
     background-color: #222;
-    /* Dark navigation background */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
@@ -62,14 +60,13 @@ ul.tabs li a {
 }
 
 ul.tabs li a:hover {
-    background-color: #333;
+    background-color: darkcyan;
 }
 
 .tab-content {
     background-color: #1a1a1a;
     padding: 20px;
     border: 1px solid #333;
-    /* Darker border */
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     color: #eee;
@@ -108,7 +105,7 @@ footer {
 .appointment-table th,
 .appointment-table td {
     padding: 10px;
-    border: 1px solid white;
+    border: 1.5px solid white;
     text-align: center;
 }
 
@@ -126,5 +123,51 @@ footer {
 }
 
 .appointment-table tbody tr:hover {
-    background-color: gray;
+    background-color: darkcyan;
+}
+
+
+/* Style for form groups */
+.form-group {
+    margin-bottom: 10px; /* Spacing between form groups */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 3px;
+    color: white;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="date"],
+.form-group input[type="time"]{
+    width: 10%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-group button {
+    padding: 10px;
+    margin-top: 15px;
+    width: 15%;
+    height: 50px;
+    background-color: #444;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.form-group button:hover {
+    background-color: darkcyan;
+}
+
+.form-group select {
+    width: 11%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #333; 
 }
