@@ -1,17 +1,18 @@
-<h2>Currently Scheduled Appointments</h2>
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Service</th>
-            <th>Date</th>
-            <th>Time</th>
-        </tr>
-    </thead>
-    <tbody>
-        {{#each appointments}}
+<section class="tab-content">
+    <h2>Scheduled Appointments</h2>
+    <table class="appointment-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Service</th>
+                <th>Date</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each appointments}}
             <tr>
                 <td>{{id}}</td>
                 <td>{{name}}</td>
@@ -20,6 +21,7 @@
                 <td>{{date}}</td>
                 <td>{{time}}</td>
             </tr>
-        {{/each}}
-    </tbody>
-</table>
+            {{/each}}
+        </tbody>
+    </table>
+</section>
