@@ -1,6 +1,7 @@
 // Add all consts, required items
 const express = require('express');
 const app = express();
+const axios = require('axios');
 const port = 3000;
 const path = require('path');
 const ExpressHandlebars = require('express-handlebars');
@@ -73,7 +74,31 @@ app.post('/schedule', async (req, res) => {
     }
 });
 
-// ... Add more routes for other pages ...
+
+// CURRENTLY GET A 401 error (unauthorized)
+app.get('/unsplash', async (req, res) => {
+    try {
+        const response = await axios.get('https://api.unsplash.com/photos/random', {
+            headers: {
+                Authorization: 'SsILXvkuLzqoV4iL6OYy2e9HvmuqH5Os9aAHVEdI4X0',
+            },
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+
+            if (imageUrl) {
+                res.render('unsplash', { image: imageUrl }); // Render 'unsplash' template with fetched image URL
+            } else {
+                res.status(500).json({ error: 'Image URL not found' });
+            }
+        } else {
+            throw new Error('Failed to fetch images');
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
