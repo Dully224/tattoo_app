@@ -1,11 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Generate Tattoo Idea</title>
-</head>
-<body>
-    <h1>Generate a Design Prompt</h1>
-    <p>Use the following image as inspiration for your tattoo design:</p>
-    <img src="{{ image }}" alt="Unsplash Image">
-</body>
-</html>
+{{!< layouts/main}}
+
+<section class="artist-header">
+    <h1>Generate Tattoo Idea</h1>
+    <center><p>Use an image to come up with an idea.</p></center>
+    {{#if image}}
+        <center><img src="{{ image }}" alt="Unsplash Image" style="width: 400px; height: auto;"></center>
+    {{else}}
+        <p>Error fetching image. Please try again later.</p>
+    {{/if}}
+</section>

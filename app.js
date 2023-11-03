@@ -35,8 +35,8 @@ app.get('/index', (req, res) => {
 
 
 // Route to serve the about page
-app.get('/about', (req, res) => {
-    res.render('about');
+app.get('/info', (req, res) => {
+    res.render('info');
 });
 
 // Route to serve the appointments page
@@ -75,25 +75,22 @@ app.post('/schedule', async (req, res) => {
 });
 
 
-// CURRENTLY GET A 401 error (unauthorized)
+
 app.get('/unsplash', async (req, res) => {
     try {
+        const accessKey = 'SsILXvkuLzqoV4iL6OYy2e9HvmuqH5Os9aAHVEdI4X0'
         const response = await axios.get('https://api.unsplash.com/photos/random', {
-            header: {
-                Authorization: 'Client_ID ${SsILXvkuLzqoV4iL6OYy2e9HvmuqH5Os9aAHVEdI4X0}'
-            },
+            headers: {
+                Authorization: `Client-ID ${accessKey}`
+            }
         });
 
-        if (response.ok) {
-            const data = await response.json();
+        const imageUrl = response.data.urls && response.data.urls.regular;
 
-            if (imageUrl) {
-                res.render('unsplash', { image: imageUrl });
-            } else {
-                res.status(500).json({ error: 'Image URL not found' });
-            }
+        if (imageUrl) {
+            res.render('unsplash', { image: imageUrl });
         } else {
-            throw new Error('Failed to fetch images');
+            res.status(500).json({ error: 'Image URL not found' });
         }
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -116,3 +113,4 @@ app.use((req, res, next) => {
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
+
