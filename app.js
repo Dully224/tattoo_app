@@ -79,8 +79,8 @@ app.post('/schedule', async (req, res) => {
 app.get('/unsplash', async (req, res) => {
     try {
         const response = await axios.get('https://api.unsplash.com/photos/random', {
-            headers: {
-                Authorization: 'SsILXvkuLzqoV4iL6OYy2e9HvmuqH5Os9aAHVEdI4X0',
+            header: {
+                Authorization: 'Client_ID ${SsILXvkuLzqoV4iL6OYy2e9HvmuqH5Os9aAHVEdI4X0}'
             },
         });
 
@@ -88,7 +88,7 @@ app.get('/unsplash', async (req, res) => {
             const data = await response.json();
 
             if (imageUrl) {
-                res.render('unsplash', { image: imageUrl }); // Render 'unsplash' template with fetched image URL
+                res.render('unsplash', { image: imageUrl });
             } else {
                 res.status(500).json({ error: 'Image URL not found' });
             }
@@ -99,6 +99,19 @@ app.get('/unsplash', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
+
+// 500
+app.use((err, req, res, next) => {
+    console.error(err.message)
+    res.status(500)
+    res.render('500')
+})
+
+// 404
+app.use((req, res, next) => {
+    res.status(404)
+    res.render('404')
+})
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
