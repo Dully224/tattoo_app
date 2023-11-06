@@ -1,9 +1,7 @@
 body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     background-color: #111;
-    /* Dark background */
     color: white;
-    /* Light text */
     margin: 0;
     padding: 0;
 }
@@ -37,6 +35,7 @@ h2 {
     padding: 20px;
 }
 
+/* Create .tab for each element */
 ul.tabs {
     list-style: none;
     padding: 0;
@@ -84,6 +83,7 @@ ul.tabs li a:hover {
     margin: 0 0 20px;
 }
 
+/* Seperate footer design */
 footer {
     background-color: #222;
     color: #bbb;
@@ -92,11 +92,14 @@ footer {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+/* Create seperate tab content */
 .tab-content {
     text-align: center;
     padding: 20px;
 }
 
+
+/* Create design for database table, foratting */
 .appointment-table {
     max-width: 600px;
     margin: 0 auto;
@@ -126,6 +129,7 @@ footer {
     background-color: darkviolet;
 }
 
+/* form seperation, based on inputs*/
 .form-group {
     margin-bottom: 10px; /* Spacing between form groups */
 }
@@ -136,6 +140,7 @@ footer {
     color: white;
 }
 
+/* Creating uniform input styling*/
 .form-group input[type="text"],
 .form-group input[type="email"],
 .form-group input[type="date"],
@@ -170,6 +175,7 @@ footer {
     color: #333; 
 }
 
+/* Artist info page, make it same for all artists listed*/
 .artist {
     border: 1px solid #ddd;
     border-radius: 5px;
