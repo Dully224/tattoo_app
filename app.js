@@ -74,8 +74,7 @@ app.post('/schedule', async (req, res) => {
     }
 });
 
-
-
+// Create API route -> 50 refeshes per hour (Unsplash limit)
 app.get('/unsplash', async (req, res) => {
     try {
         const accessKey = 'SsILXvkuLzqoV4iL6OYy2e9HvmuqH5Os9aAHVEdI4X0'
