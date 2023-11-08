@@ -197,3 +197,15 @@ footer {
 .artist-header h1{
     font-size: 28px;
 }
+
+.index-list {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.index-list ul{
+    list-style-type: none;
+}
