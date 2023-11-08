@@ -7,6 +7,7 @@ const path = require('path');
 const ExpressHandlebars = require('express-handlebars');
 const mysql = require('mysql2/promise');
 
+// Use public dir
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 
@@ -32,7 +33,6 @@ app.get('/', (req, res) => {
 app.get('/index', (req, res) => {
     res.render('index'); 
 });
-
 
 // Route to serve the about page
 app.get('/info', (req, res) => {
@@ -80,11 +80,11 @@ app.get('/unsplash', async (req, res) => {
         const accessKey = 'SsILXvkuLzqoV4iL6OYy2e9HvmuqH5Os9aAHVEdI4X0'
         const response = await axios.get('https://api.unsplash.com/photos/random', {
             headers: {
-                Authorization: `Client-ID ${accessKey}`
+                Authorization: `Client-ID ${accessKey}` // Line provided by Unsplash
             }
         });
 
-        const imageUrl = response.data.urls && response.data.urls.regular;
+        const imageUrl = response.data.urls && response.data.urls.regular; // Line provided by Unsplash
 
         if (imageUrl) {
             res.render('unsplash', { image: imageUrl });
@@ -112,4 +112,3 @@ app.use((req, res, next) => {
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
-
