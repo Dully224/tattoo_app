@@ -67,7 +67,7 @@ app.post('/schedule', async (req, res) => {
     // Insert the appointment data into the database
     try {
         await db.query('INSERT INTO appointments (name, email, service, date, time) VALUES (?, ?, ?, ?, ?)', [name, email, service, date, time]);
-        res.send('Appointment scheduled successfully!');
+        res.send('Appointment scheduled successfully! See you then!');
     } catch (err) {
         console.error('Error scheduling appointment:', err);
         res.status(500).send('Internal Server Error');
