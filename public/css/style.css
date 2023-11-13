@@ -122,7 +122,7 @@ footer {
 }
 
 .appointment-table tbody tr:nth-child(even) {
-    background-color: black;
+    background-color: #222;
 }
 
 .appointment-table tbody tr:hover {
@@ -131,7 +131,8 @@ footer {
 
 /* form seperation, based on inputs*/
 .form-group {
-    margin-bottom: 10px; /* Spacing between form groups */
+    margin-bottom: 10px;
+    /* Spacing between form groups */
 }
 
 .form-group label {
@@ -144,7 +145,7 @@ footer {
 .form-group input[type="text"],
 .form-group input[type="email"],
 .form-group input[type="date"],
-.form-group input[type="time"]{
+.form-group input[type="time"] {
     width: 10%;
     padding: 8px;
     border: 1px solid #ccc;
@@ -172,7 +173,7 @@ footer {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    color: #333; 
+    color: #333;
 }
 
 /* Artist info page, make it same for all artists listed*/
@@ -197,7 +198,7 @@ footer {
     background-color: #222;
 }
 
-.artist-header h1{
+.artist-header h1 {
     font-size: 28px;
 }
 
@@ -209,12 +210,19 @@ footer {
     margin-bottom: 20px;
 }
 
-.index-list ul{
+.index-list ul {
     list-style-type: none;
 }
 
-.index-list img{
+.index-list img {
     height: 400px;
     width: 750px;
     background-color: #111;
+}
+
+.main-font {
+    font-family: cursive;
+    font-size: 45px;
+    word-spacing: 2.5px;
+    text-align: center;
 }
