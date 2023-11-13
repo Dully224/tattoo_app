@@ -61,6 +61,7 @@ app.get('/schedule', (req, res) => {
 
 // Route to handle appointment scheduling form submission
 app.post('/schedule', async (req, res) => {
+    
     // Extract form data
     const { name, email, service, date, time } = req.body;
 
