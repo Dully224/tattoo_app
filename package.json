@@ -1,8 +1,11 @@
 {
   "dependencies": {
     "axios": "^1.6.0",
+    "cookie-parser": "^1.4.6",
     "express": "^4.18.2",
     "express-handlebars": "^7.1.2",
+    "express-openid-connect": "^2.17.1",
+    "express-session": "^1.17.3",
     "handlebars-helper": "^0.0.12",
     "mysql2": "^3.6.2",
     "node": "^21.1.0",

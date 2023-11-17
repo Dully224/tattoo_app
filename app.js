@@ -6,15 +6,56 @@ const port = 3000;
 const path = require('path');
 const ExpressHandlebars = require('express-handlebars');
 const mysql = require('mysql2/promise');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
+const { auth } = require('express-openid-connect');
 
 // Use public dir
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 
+
+// Use cookie parser
+app.use(cookieParser());
+
+// Use sessions
+app.use(session({
+    secret: '12345abcde', 
+    resave: false,
+    saveUninitialized: false
+}));
+
+const config = {
+    authRequired: false,
+    auth0Logout: true,
+    secret: 'a long, randomly-generated string stored in env',
+    baseURL: 'http://localhost:3000',
+    clientID: 'R4Q6p1PcP1hG3Nw0IiCtrd0xrXbAY5NE',
+    issuerBaseURL: 'https://dev-s7zgfjc1ul0bf3yv.us.auth0.com'
+  };
+  
+  // auth router attaches /login, /logout, and /callback routes to the baseURL
+  app.use(auth(config));
+
 // Create a Handlebars engine
 app.engine('handlebars', ExpressHandlebars.engine());
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'public', 'views'));
+
+// Middleware to set up a user session
+app.use((req, res, next) => {
+    if (!req.session.user) {
+        req.session.user = {
+            username: 'Guest'
+        };
+    }
+    
+    // Set a cookie named 'user' with the username
+    res.cookie('user', req.session.user.username);
+    
+    next();
+});
+
 
 // Database configuration
 const db = mysql.createPool({
@@ -26,17 +67,22 @@ const db = mysql.createPool({
 
 // Route to serve the home page
 app.get('/', (req, res) => {
-    res.render('index');
+    res.render('index', { user: req.session.user });
 });
+
+// req.isAuthenticated is provided from the auth router
+app.get('/login', (req, res) => {
+    res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
+  });
 
 // Route to serve the index page
 app.get('/index', (req, res) => {
-    res.render('index'); 
+    res.render('index', { user: req.session.user }); 
 });
 
 // Route to serve the about page
 app.get('/info', (req, res) => {
-    res.render('info');
+    res.render('info', { user: req.session.user });
 });
 
 // Route to serve the appointments page
@@ -56,7 +102,7 @@ app.get('/appointments-table', async (req, res) => {
 
 // Route to serve the schedule page
 app.get('/schedule', (req, res) => {
-    res.render('schedule');
+    res.render('schedule', { user: req.session.user });
 });
 
 // Route to handle appointment scheduling form submission
