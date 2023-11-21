@@ -8,7 +8,7 @@ const ExpressHandlebars = require('express-handlebars');
 const mysql = require('mysql2/promise');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
-const { auth } = require('express-openid-connect');
+const { auth , requiresAuth } = require('express-openid-connect');
 
 // Use public dir
 app.use(express.static('public'));
@@ -65,6 +65,9 @@ const db = mysql.createPool({
     database: 'tattoodb'
 });
 
+// Middleware to require authentication for all routes
+app.use(requiresAuth());
+
 // Route to serve the home page
 app.get('/', (req, res) => {
     res.render('index', { user: req.session.user });
@@ -86,7 +89,7 @@ app.get('/info', (req, res) => {
 });
 
 // Route to serve the appointments page
-app.get('/appointments-table', async (req, res) => {
+app.get('/appointments-table' , requiresAuth(),  async (req, res) => {
     try {
         // Fetch data from the database
         const [rows, fields] = await db.query('SELECT * FROM appointments');
@@ -101,8 +104,8 @@ app.get('/appointments-table', async (req, res) => {
 });
 
 // Route to serve the schedule page
-app.get('/schedule', (req, res) => {
-    res.render('schedule', { user: req.session.user });
+app.get('/schedule' , requiresAuth(), (req, res) => {
+    res.render('schedule', { user: req.session.user }) , { user: req.openid.user };
 });
 
 // Route to handle appointment scheduling form submission
@@ -122,7 +125,7 @@ app.post('/schedule', async (req, res) => {
 });
 
 // Create API route -> 50 refeshes per hour (Unsplash limit)
-app.get('/unsplash', async (req, res) => {
+app.get('/unsplash' , requiresAuth(), async (req, res) => {
     try {
         const accessKey = 'SsILXvkuLzqoV4iL6OYy2e9HvmuqH5Os9aAHVEdI4X0'
         const response = await axios.get('https://api.unsplash.com/photos/random', {
@@ -141,6 +144,12 @@ app.get('/unsplash', async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
+});
+
+
+app.get('/logout', (req, res) => {
+    req.logout();
+    res.redirect('/');
 });
 
 // 500
