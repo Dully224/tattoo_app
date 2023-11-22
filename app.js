@@ -14,7 +14,6 @@ const { auth , requiresAuth } = require('express-openid-connect');
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 
-
 // Use cookie parser
 app.use(cookieParser());
 
@@ -25,6 +24,7 @@ app.use(session({
     saveUninitialized: false
 }));
 
+// config for auth0
 const config = {
     authRequired: false,
     auth0Logout: true,
@@ -125,7 +125,7 @@ app.post('/schedule', async (req, res) => {
 });
 
 // Create API route -> 50 refeshes per hour (Unsplash limit)
-app.get('/unsplash' , requiresAuth(), async (req, res) => {
+app.get('/unsplash', requiresAuth(), async (req, res) => {
     try {
         const accessKey = 'SsILXvkuLzqoV4iL6OYy2e9HvmuqH5Os9aAHVEdI4X0'
         const response = await axios.get('https://api.unsplash.com/photos/random', {
@@ -137,9 +137,9 @@ app.get('/unsplash' , requiresAuth(), async (req, res) => {
         const imageUrl = response.data.urls && response.data.urls.regular; // Line provided by Unsplash
 
         if (imageUrl) {
-            res.render('unsplash', { image: imageUrl });
+            res.render('unsplash', { image: imageUrl }); // Pull image
         } else {
-            res.status(500).json({ error: 'Image URL not found' });
+            res.status(500).json({ error: 'Image URL not found' }); // error if no image is found
         }
     } catch (error) {
         res.status(500).json({ error: error.message });
