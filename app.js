@@ -89,7 +89,7 @@ app.get('/info', (req, res) => {
 });
 
 // Route to serve the appointments page
-app.get('/appointments-table' , requiresAuth(),  async (req, res) => {
+app.get('/appointments-table' , requiresAuth(), async (req, res) => {
     try {
         // Fetch data from the database
         const [rows, fields] = await db.query('SELECT * FROM appointments');
