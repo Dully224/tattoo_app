@@ -8,7 +8,7 @@
     "express-session": "^1.17.3",
     "handlebars-helper": "^0.0.12",
     "mysql2": "^3.6.2",
-    "node": "^21.1.0",
+    "node": "^21.2.0",
     "nodemon": "^3.0.1",
     "path": "^0.12.7"
   },

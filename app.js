@@ -110,19 +110,25 @@ app.get('/schedule' , requiresAuth(), (req, res) => {
 
 // Route to handle appointment scheduling form submission
 app.post('/schedule', async (req, res) => {
-    
     // Extract form data
     const { name, email, service, date, time } = req.body;
 
     // Insert the appointment data into the database
     try {
         await db.query('INSERT INTO appointments (name, email, service, date, time) VALUES (?, ?, ?, ?, ?)', [name, email, service, date, time]);
-        res.send('Appointment scheduled successfully! See you then!');
+
+        // Include a link/button in the response HTML to redirect to the appointments tab
+        const redirectButton = '<center><a href="/appointments-table"><button>View Appointments</button></a></center>';
+        const successMessage = '<center>Appointment scheduled successfully! See you then!</center>';
+
+        // Send the response with the success message and the link/button
+        res.send(`${successMessage}<br>${redirectButton}`);
     } catch (err) {
         console.error('Error scheduling appointment:', err);
         res.status(500).send('Internal Server Error');
     }
 });
+
 
 // Create API route -> 50 refeshes per hour (Unsplash limit)
 app.get('/unsplash', requiresAuth(), async (req, res) => {
