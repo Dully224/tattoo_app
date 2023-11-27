@@ -7,17 +7,20 @@
 <h1 class="main-font">DARKSIDE TATTOO</h1>
 <center><span style='font-size:55px;'>&#128137;</span></center>
 <body>
-
     <!-- Tab navigation -->
     <ul class="tabs">
-        <li><a href="/login">Login</a></li>
-        <li><a href="/logout">Logout</a></li>
         <li><a href="/index">Home</a></li>
         <li><a href="/info">Artists</a></li>
         <li><a href="/schedule">Schedule</a></li>
         <li><a href="/unsplash">Tattoo Idea Generator</a></li>
         <li><a href="/appointments-table">Appointments</a></li>
-        <!-- Add pages as needed-->
+{{#if user}}
+    <!-- User is logged in, show user information -->
+    <li><a href="/logout">Logout</a></li>
+{{else}}
+    <!-- User is not logged in, show login link -->
+    <li><a href="/login">Login</a></li>
+{{/if}}
     </ul>
     {{{body}}}
 </body>

@@ -109,7 +109,7 @@ app.get('/schedule' , requiresAuth(), (req, res) => {
 });
 
 // Route to handle appointment scheduling form submission
-app.post('/schedule', async (req, res) => {
+app.post('/schedule', requiresAuth(), async (req, res) => {
     // Extract form data
     const { name, email, service, date, time } = req.body;
 
@@ -130,7 +130,7 @@ app.post('/schedule', async (req, res) => {
 });
 
 
-// Create API route -> 50 refeshes per hour (Unsplash limit)
+// Create API route
 app.get('/unsplash', requiresAuth(), async (req, res) => {
     try {
         const accessKey = 'SsILXvkuLzqoV4iL6OYy2e9HvmuqH5Os9aAHVEdI4X0'
@@ -152,7 +152,7 @@ app.get('/unsplash', requiresAuth(), async (req, res) => {
     }
 });
 
-
+// Logout route
 app.get('/logout', (req, res) => {
     req.logout();
     res.redirect('/');
