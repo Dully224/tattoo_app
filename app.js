@@ -68,7 +68,7 @@ app.use(requiresAuth());
 
 
                                        /* ALL ROUTES */
-                                       
+
 // Route to serve the home page
 app.get('/', (req, res) => {
     res.render('index', { user: req.session.user });
