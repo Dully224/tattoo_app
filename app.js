@@ -42,20 +42,18 @@ app.engine('handlebars', ExpressHandlebars.engine());
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'public', 'views'));
 
-// Middleware to set up a user session
+// Middleware to set up a user session (this middleware hated me)
 app.use((req, res, next) => {
-    if (!req.session.user) {
-        req.session.user = {
-            username: 'Guest'
-        };
-    }
-    
+    req.session.user = req.oidc.user || null; // required null to fix.
+
     // Set a cookie named 'user' with the username
-    res.cookie('user', req.session.user.username);
-    
+    res.cookie('user', req.session.user ? req.session.user.nickname : 'Guest'); 
+
+    // Pass the user information to locals for synchronous access in templates
+    res.locals.user = req.session.user;
+
     next();
 });
-
 
 // Database configuration
 const db = mysql.createPool({
@@ -68,6 +66,9 @@ const db = mysql.createPool({
 // Middleware to require authentication for all routes
 app.use(requiresAuth());
 
+
+                                       /* ALL ROUTES */
+                                       
 // Route to serve the home page
 app.get('/', (req, res) => {
     res.render('index', { user: req.session.user });
@@ -171,6 +172,7 @@ app.use((req, res, next) => {
     res.render('404')
 })
 
+// Console log to port
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
