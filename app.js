@@ -42,7 +42,7 @@ app.engine('handlebars', ExpressHandlebars.engine());
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'public', 'views'));
 
-// Middleware to set up a user session (this middleware hated me)
+// Middleware to set up a user session (FINALLY WORKS CORRECTLY!!)
 app.use((req, res, next) => {
     req.session.user = req.oidc.user || null; // required null to fix.
 
