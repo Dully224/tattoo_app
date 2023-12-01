@@ -159,6 +159,11 @@ app.get('/logout', (req, res) => {
     res.redirect('/');
 });
 
+// Define a route for the "horse" page
+app.get('/horse', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'views', 'horse.html'));
+  });
+
 // 500
 app.use((err, req, res, next) => {
     console.error(err.message)
