@@ -160,8 +160,8 @@ app.get('/logout', (req, res) => {
 });
 
 // Define a route for the "horse" page
-app.get('/horse', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'views', 'horse.html'));
+app.get('/blank', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'views', 'blank.html'));
   });
 
 // 500
