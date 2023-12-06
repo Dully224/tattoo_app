@@ -19,7 +19,7 @@ app.use(cookieParser());
 
 // Use sessions
 app.use(session({
-    secret: '12345abcde', 
+    secret: '12345abcde$$@@', 
     resave: false,
     saveUninitialized: false
 }));
@@ -28,7 +28,7 @@ app.use(session({
 const config = {
     authRequired: false,
     auth0Logout: true,
-    secret: '12345abcde',
+    secret: '12345abcde$$@@',
     baseURL: 'http://localhost:3000',
     clientID: 'R4Q6p1PcP1hG3Nw0IiCtrd0xrXbAY5NE',
     issuerBaseURL: 'https://dev-s7zgfjc1ul0bf3yv.us.auth0.com'
